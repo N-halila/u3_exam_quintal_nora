@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.712277810803538 0.6581318731522863 0.24397286279006988 0.9597472125517106
-  position 0.3642492379979608 0.48051562490995736 0.4014721581762317
+  orientation 0.7289915233972964 0.6394289409604843 0.244339903161646 5.317578928030412
+  position -0.32687377567527415 0.49727167046401777 0.4995753086827782
 }
 TexturedBackground {
 }
@@ -24,6 +24,12 @@ DEF OMNI_WHEELS Robot {
           device [
             RotationalMotor {
               name "wheel1"
+              maxVelocity 30.36873
+              maxTorque 0.84738621
+            }
+            PositionSensor {
+              name "encoder1"
+              resolution 0.0038484
             }
           ]
           endPoint Solid {
@@ -287,11 +293,16 @@ DEF OMNI_WHEELS Robot {
           device [
             RotationalMotor {
               name "wheel2"
+              maxVelocity 30.36873
+              maxTorque 0.84738621
+            }
+            PositionSensor {
+              resolution 0.0038484
             }
           ]
           endPoint Solid {
             translation 0 0 0.1
-            rotation 0 0 1 0.00240581
+            rotation 0 0 1 0.00240580999995935
             children [
               DEF sr1 HingeJoint {
                 jointParameters HingeJointParameters {
@@ -483,11 +494,16 @@ DEF OMNI_WHEELS Robot {
           device [
             RotationalMotor {
               name "wheel3"
+              maxVelocity 30.36873
+              maxTorque 0.84738621
+            }
+            PositionSensor {
+              resolution 0.0038484
             }
           ]
           endPoint Solid {
             translation 0 0 0.1
-            rotation 0 0 1 0.00390944
+            rotation 0 0 1 0.0039094400000208316
             children [
               DEF sr1 HingeJoint {
                 jointParameters HingeJointParameters {
@@ -698,6 +714,11 @@ DEF OMNI_WHEELS Robot {
           }
         }
       ]
+      name "D_sensor1"
+      lookupTable [
+        0 0 0
+        0.2 65535 0
+      ]
     }
     DistanceSensor {
       translation 0.07 0.05000000000000002 0.07
@@ -708,7 +729,11 @@ DEF OMNI_WHEELS Robot {
           geometry USE DISTANCE_SEN
         }
       ]
-      name "distance sensor(1)"
+      name "D_sensor2"
+      lookupTable [
+        0 0 0
+        0.2 65535 0
+      ]
     }
   ]
   boundingObject USE BODY_TRANS

@@ -1,0 +1,10 @@
+This robot has 3 omnidirectional wheels with 3 rotational dc motors, position sensors and distance sensors
+for the motor, i take into consideration the information that the professor give us in the datasheet and then says 
+that no-load speed is 290 rpm if we have to convert that to radians over seconds so we implement the following formula
+ω(rad.s)=2π/60.N(rpm) this is to divide 2pi between 60 and then multiplied for the number of revolutions and this gives me 3036873radians/seconds.
+For the maximun torque is something similar we have from the datasheet 120 oz.in and we have to convert it to newton per meter in this case i apply a rule of three that was simplier that use the entire formula, this means that knowing that 1 oz-in is equal to 0.00706 newton meter, i just multiplied it and it gives me 0.84738621 n.m.
+
+In the case of the position sensor i have to know the resolution and for that one i use according to the datasheet of our motor
+the quantity of counts per revolution that in my case was 1632.67 and i divide 2pi that is an entire round between the counts that my sensor does per revolution so it gives me the value of 0.0038484.
+
+Now for the distance sensor we have to take into consideration the information from the datasheet in our case this says that it has a resolution of 16 bits and an operative range that goes from 0 to 200 
