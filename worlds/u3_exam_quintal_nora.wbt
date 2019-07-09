@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.09882672148815302 -0.9506597896846015 -0.2940735339957203 3.7600548660129816
-  position 0.5459597327795849 0.8525248598879815 -0.47206036048732947
+  orientation 0.20192708598692652 -0.9698180986923575 0.13666860427168093 1.2186102514513497
+  position -0.9985948130894431 0.04686289840139467 0.5049523434612779
 }
 TexturedBackground {
 }
@@ -276,7 +276,7 @@ DEF OMNI_WHEELS Robot {
           }
         }
       ]
-      name "wheel 1"
+      name "wheel1"
       boundingObject DEF DUMMY Sphere {
         radius 0.01
       }
@@ -480,7 +480,7 @@ DEF OMNI_WHEELS Robot {
           }
         }
       ]
-      name "wheel 2"
+      name "wheel2"
       boundingObject USE DUMMY
       physics Physics {
       }
@@ -682,7 +682,7 @@ DEF OMNI_WHEELS Robot {
           }
         }
       ]
-      name "wheel 3"
+      name "wheel3"
       boundingObject USE DUMMY
       physics Physics {
       }
@@ -722,6 +722,7 @@ DEF OMNI_WHEELS Robot {
         0 0 0
         0.2 65535 0
       ]
+      resolution 1
     }
     DistanceSensor {
       translation 0.07 0.05000000000000002 0.07
@@ -737,6 +738,7 @@ DEF OMNI_WHEELS Robot {
         0 0 0
         0.2 65535 0
       ]
+      resolution 1
     }
   ]
   boundingObject USE BODY_TRANS

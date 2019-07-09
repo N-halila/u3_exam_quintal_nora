@@ -46,7 +46,7 @@ int main(int argc, char **argv)
   double pos_sensor1;
   double pos_sensor2;
   double pos_sensor3;
-  int New_Pos;
+  float New_Pos;
   
 
   /*
@@ -108,37 +108,37 @@ int main(int argc, char **argv)
      pos_sensor3 =wb_position_sensor_get_value(Encoder_3);
      
     
-     //avanzar
+     //avanza
      wb_motor_set_velocity(wheel_right, -vel);   
      wb_motor_set_velocity(wheel_left, vel);
-     wb_motor_set_velocity(wheel_back, 0);
+     wb_motor_set_velocity(wheel_back, -vel);
      
      ////////////////////////////////
-     if (med_2<=0.17 && med_2> med_1 && g_d==0){
+     if (med_1<=0.17 && med_1> med_2 && g_d==0){
      
-     New_Pos =pos_sensor1- PI;
+     New_Pos =pos_sensor1- 3.15;
      g_d=1;     
     
      }
      if (g_d==1) {
      
        if (New_Pos > pos_sensor1){
-       wb_motor_set_velocity(wheel_right, 0);   
-       wb_motor_set_velocity(wheel_left, 0);
-       wb_motor_set_velocity(wheel_back, 0);
+       wb_motor_set_velocity(wheel_right, vel);   
+       wb_motor_set_velocity(wheel_left, -vel);
+       wb_motor_set_velocity(wheel_back, vel);
        }
     }
     else {
           g_d=0;
          }    
      
-     if (med_1<=0.17 && med_1 > med_2 && g_i==0){
-       New_Pos =pos_sensor1- PI;
+     if (med_2<=0.17 && med_2 > med_1 && g_i==0){
+       New_Pos =pos_sensor1+ PI;
        g_i=1;     }
     
      if (g_i==1) {
      
-       if (New_Pos > pos_sensor1){
+       if (New_Pos < pos_sensor1){
        wb_motor_set_velocity(wheel_right, vel);   
        wb_motor_set_velocity(wheel_left, 0);
        wb_motor_set_velocity(wheel_back,-vel );
@@ -146,7 +146,11 @@ int main(int argc, char **argv)
        }
      else{g_i=0;}
     
-     
+    printf("Distance Value Left in Bits: %i\t",dis_sen1);
+    printf("Distance Measure Left in Meters: %f \t",med_2);
+    printf("Distance Measure Right in Meters %f \t",med_1);
+    printf("Position Value 1:  %f\n",pos_sensor1);
+    printf("posfinal: %f",New_Pos);
      
      
      
