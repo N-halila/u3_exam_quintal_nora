@@ -40,13 +40,13 @@ int main(int argc, char **argv)
   double dis_sen1;
   double med_1;
   double med_2;
-  double G_D=0;
-  double G_I=0;
+  int g_d=0;
+  int g_i=0;
   double dis_sen2;
   double pos_sensor1;
   double pos_sensor2;
   double pos_sensor3;
-  double New_Pos;
+  int New_Pos;
   
 
   /*
@@ -100,8 +100,8 @@ int main(int argc, char **argv)
      
      
      
-     med_1= (dist_sen1)*.2/Resolution;//measure of distance sensor 1
-     med_2=(dist_sen2)*.2/Resolution;//measure of distance sensor 2
+     med_1= (dis_sen1)*.2/Resolution;//measure of distance sensor 1
+     med_2=(dis_sen2)*.2/Resolution;//measure of distance sensor 2
      
      pos_sensor1 =wb_position_sensor_get_value(Encoder_1);
      pos_sensor2 =wb_position_sensor_get_value(Encoder_2);
@@ -114,18 +114,38 @@ int main(int argc, char **argv)
      wb_motor_set_velocity(wheel_back, 0);
      
      ////////////////////////////////
-     if (med_2<=0.17 && med_2> med_1 && G_D==0){
+     if (med_2<=0.17 && med_2> med_1 && g_d==0){
      
      New_Pos =pos_sensor1- PI;
-     G_D=1;
-     
-     
+     g_d=1;     
+    
      }
-        
-    
-    
+     if (g_d==1) {
      
+       if (New_Pos > pos_sensor1){
+       wb_motor_set_velocity(wheel_right, 0);   
+       wb_motor_set_velocity(wheel_left, 0);
+       wb_motor_set_velocity(wheel_back, 0);
+       }
+    }
+    else {
+          g_d=0;
+         }    
      
+     if (med_1<=0.17 && med_1 > med_2 && g_i==0){
+       New_Pos =pos_sensor1- PI;
+       g_i=1;     }
+    
+     if (g_i==1) {
+     
+       if (New_Pos > pos_sensor1){
+       wb_motor_set_velocity(wheel_right, vel);   
+       wb_motor_set_velocity(wheel_left, 0);
+       wb_motor_set_velocity(wheel_back,-vel );
+       }
+       }
+     else{g_i=0;}
+    
      
      
      
