@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.7289915233972964 0.6394289409604843 0.244339903161646 5.317578928030412
-  position -0.32687377567527415 0.49727167046401777 0.4995753086827782
+  orientation 0.3295010924060006 -0.8869136258104006 -0.3237487458741749 4.610171698184049
+  position 3.008953324784711 3.266961978375638 -0.1292750069613493
 }
 TexturedBackground {
 }
@@ -740,4 +740,16 @@ DEF OMNI_WHEELS Robot {
   physics Physics {
   }
   controller "u3_exam_quintal_nora"
+}
+Solid {
+  translation 0 0 0.5
+  children [
+    Shape {
+      geometry Box {
+        size 2.8000000000000003 1.4000000000000001 0.43
+      }
+    }
+  ]
+  physics Physics {
+  }
 }
