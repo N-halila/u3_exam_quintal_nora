@@ -17,11 +17,15 @@
 #include <webots/position_sensor.h>
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
 /*
  * You may want to add macros here.
  */
 #define TIME_STEP 64
-#define pi 3.1416
+#define PI 3.1416
+#define Resolution 65535
 
 /*
  * This is the main program.
@@ -30,15 +34,20 @@
  */
 int main(int argc, char **argv)
 {
-  int  key_letter;
   /* necessary to initialize webots stuff */
   wb_robot_init();
-  double vel;
+  double vel=5;
   double dis_sen1;
+  double med_1;
+  double med_2;
+  double G_D=0;
+  double G_I=0;
   double dis_sen2;
   double pos_sensor1;
   double pos_sensor2;
   double pos_sensor3;
+  double New_Pos;
+  
 
   /*
    * You should declare here WbDeviceTag variables for storing
@@ -88,70 +97,33 @@ int main(int argc, char **argv)
      dis_sen1 = wb_distance_sensor_get_value(Dist_1);
      dis_sen2 = wb_distance_sensor_get_value(Dist_2);
      
-     pos_sensor1 =wb_position_sensor_get_value(Encoder1);
-     pos_sensor2 =wb_position_sensor_get_value(Encoder2);
-     pos_sensor3 =wb_position_sensor_get_value(Encoder3);
      
      
-    /* Process sensor data here */
-
-    /*
-     * Enter here functions to send actuator commands, like:
-     * wb_differential_wheels_set_speed(100.0,100.0);
-     */
      
-     if (key_letter== WB_KEYBOARD_RIGHT){
-     vel = 26.6666666666666668;
+     med_1= (dist_sen1)*.2/Resolution;//measure of distance sensor 1
+     med_2=(dist_sen2)*.2/Resolution;//measure of distance sensor 2
+     
+     pos_sensor1 =wb_position_sensor_get_value(Encoder_1);
+     pos_sensor2 =wb_position_sensor_get_value(Encoder_2);
+     pos_sensor3 =wb_position_sensor_get_value(Encoder_3);
+     
+    
+     //avanzar
      wb_motor_set_velocity(wheel_right, -vel);   
      wb_motor_set_velocity(wheel_left, vel);
-     rpm= (vel* (2*pi))/60;
-     lin_vel= (((2*pi)*radio)/60)*rpm;
-     printf("the linear velocity is %lf\n", lin_vel);
-     printf("the revolution per minute are %lf\n", rpm);
-     }
+     wb_motor_set_velocity(wheel_back, 0);
      
-     else if (key_letter== WB_KEYBOARD_LEFT){
-     vel = 26.66666666666666668;
-     wb_motor_set_velocity(wheel_right, 26.666666666666668);   
-     wb_motor_set_velocity(wheel_left, -26.666666666666668);
-     rpm= (vel* (2*pi))/60;
-     lin_vel= (((2*pi)*radio)/60)*rpm;
-     printf("the linear velocity is %lf\n", lin_vel);
-     printf("the revolution per minute are %lf\n", rpm);
-     }
+     ////////////////////////////////
+     if (med_2<=0.17 && med_2> med_1 && G_D==0){
      
-     else if (key_letter== WB_KEYBOARD_UP){
-     vel = 40;
-     wb_motor_set_velocity(wheel_right, vel);   
-     wb_motor_set_velocity(wheel_left, vel);    
-     rpm= (vel* (2*pi))/60;
-     lin_vel= (((2*pi)*radio)/60)*rpm;
-     printf("the linear velocity is %lf\n", lin_vel);
-     printf("the revolution per minute are %lf\n", rpm);
+     New_Pos =pos_sensor1- PI;
+     G_D=1;
+     
+     
+     }
+        
     
-     
-     
-     }
-     
-      else if (key_letter== WB_KEYBOARD_DOWN){
-      vel= 1.3333333333333335;
-     wb_motor_set_velocity(wheel_right, -vel);   
-     wb_motor_set_velocity(wheel_left, -vel);
-     
-     rpm= (vel* (2*pi))/60;
-     lin_vel= (((2*pi)*radio)/60)*rpm;
-     printf("the linear velocity is %lf\n", lin_vel);
-     printf("the revolution per minute are %lf\n", rpm);
-     }
-     
-     else {
-     wb_motor_set_velocity(wheel_right, 0);   
-     wb_motor_set_velocity(wheel_left, 0);
-   
-   
-     }
-     
-     
+    
      
      
      
